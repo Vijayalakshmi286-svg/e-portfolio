@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vijayalakshmi — Computer Science Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0d1117;
+    --bg-soft: #131a23;
+    --panel: #161d29;
+    --line: #232b39;
+    --text: #e6edf3;
+    --text-dim: #8b97a8;
+    --accent: #7ee787;
+    --accent-soft: rgba(126,231,135,0.12);
+    --warn: #f2cc60;
+    --font-display: "Space Grotesk", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-display);line-height:1.6;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent-soft); color:var(--accent);}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .eyebrow{font-family:var(--font-mono);font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .eyebrow::before{content:"";width:18px;height:1px;background:var(--accent);display:inline-block;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:700; letter-spacing:-0.02em;}
+  h2{font-size:clamp(28px,4vw,40px); margin-bottom:40px;}
+  header{position:fixed; top:0; left:0; right:0; z-index:100;background:rgba(13,17,23,0.75);backdrop-filter: blur(10px);border-bottom:1px solid var(--line);}
+  nav{max-width:1100px;margin:0 auto;padding:0 24px;height:64px; display:flex; align-items:center; justify-content:space-between;}
+  .logo{font-family:var(--font-mono); font-weight:600; font-size:16px;color:var(--text);}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex; gap:32px; font-family:var(--font-mono); font-size:13px;}
+  .nav-links a{color:var(--text-dim);transition:color .2s ease;position:relative;}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--text);}
+  .nav-links a::after{content:""; position:absolute; left:0; bottom:-6px;width:0; height:2px; background:var(--accent);transition:width .25s ease;}
+  .nav-links a:hover::after{width:100%;}
+  .menu-toggle{display:none;}
+  .hero{min-height:100vh;display:flex; align-items:center;padding-top:64px;position:relative;border-bottom:1px solid var(--line);}
+  .hero-grid{position:absolute; inset:0;background-image:linear-gradient(var(--line) 1px, transparent 1px),linear-gradient(90deg, var(--line) 1px, transparent 1px);background-size: 64px 64px;mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(0,0,0,0.6), transparent);opacity:0.5;pointer-events:none;}
+  .hero-content{position:relative; z-index:1; width:100%;}
+  .hero-tag{font-family:var(--font-mono);color:var(--accent);font-size:14px;margin-bottom:18px;display:flex; align-items:center; gap:10px;}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(126,231,135,.6);animation: pulse 2.4s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(126,231,135,.5);}70%{box-shadow:0 0 0 10px rgba(126,231,135,0);}100%{box-shadow:0 0 0 0 rgba(126,231,135,0);}}
+  .hero h1{font-size:clamp(40px, 8vw, 84px);line-height:1.05;margin-bottom:20px;}
+  .hero h1 .accent{color:var(--accent);}
+  .hero p.lead{max-width:560px;color:var(--text-dim);font-size:18px;margin-bottom:36px;}
+  .terminal{font-family:var(--font-mono);font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;max-width:540px;margin-bottom:40px;color:var(--text-dim);}
+  .terminal .line{display:flex; gap:10px;}
+  .terminal .prompt{color:var(--accent);}
+  .terminal .caret{display:inline-block; width:8px; height:16px; background:var(--accent);margin-left:4px; animation: blink 1s steps(1) infinite; vertical-align:-2px;}
+  @keyframes blink{ 50%{opacity:0;} }
+  .btn-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{font-family:var(--font-mono);font-size:14px;padding:13px 26px;border-radius:6px;border:1px solid var(--accent);transition: all .2s ease;display:inline-flex; align-items:center; gap:8px;}
+  .btn-primary{background:var(--accent); color:#06240e; font-weight:600;}
+  .btn-primary:hover{background:#9bf2a8;}
+  .btn-ghost{color:var(--text); border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .about-grid{display:grid;grid-template-columns: 1.1fr 0.9fr;gap:60px;align-items:start;}
+  .about-text p{color:var(--text-dim); margin-bottom:18px; font-size:16px;}
+  .about-text strong{color:var(--text);}
+  .stack-list{font-family:var(--font-mono);font-size:13px;display:flex; flex-wrap:wrap; gap:10px;margin-top:24px;}
+  .stack-list span{border:1px solid var(--line);background:var(--panel);padding:6px 12px;border-radius:5px;color:var(--text-dim);}
+  .info-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:28px;font-family:var(--font-mono);font-size:13.5px;}
+  .info-card .ic-title{color:var(--accent); margin-bottom:18px; font-size:13px;letter-spacing:.08em; text-transform:uppercase;}
+  .info-row{display:flex; justify-content:space-between; gap:16px;padding:10px 0; border-bottom:1px solid var(--line);color:var(--text-dim);}
+  .info-row:last-child{border-bottom:none;}
+  .info-row b{color:var(--text); font-weight:500; text-align:right;}
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .skill-card{background:var(--bg-soft);padding:28px;}
+  .skill-card h3{font-size:16px; margin-bottom:14px;display:flex; align-items:center; gap:10px;}
+  .skill-card h3 .tag{font-family:var(--font-mono); font-size:11px; color:var(--accent);border:1px solid var(--accent); border-radius:4px; padding:2px 6px;}
+  .skill-card ul{list-style:none; color:var(--text-dim); font-size:14px;}
+  .skill-card li{padding:4px 0; padding-left:16px; position:relative;}
+  .skill-card li::before{content:"›"; position:absolute; left:0; color:var(--accent); font-family:var(--font-mono);}
+  .projects{display:flex; flex-direction:column; gap:1px; border:1px solid var(--line); border-radius:10px; overflow:hidden;}
+  .project{background:var(--bg-soft);display:grid;grid-template-columns: 80px 1fr 200px;gap:24px;padding:32px;border-bottom:1px solid var(--line);transition: background .2s ease;}
+  .project:last-child{border-bottom:none;}
+  .project:hover{background:var(--panel);}
+  .project-index{font-family:var(--font-mono); color:var(--text-dim); font-size:13px;}
+  .project-body h3{font-size:20px; margin-bottom:10px;}
+  .project-body p{color:var(--text-dim); font-size:14.5px; margin-bottom:14px; max-width:560px;}
+  .project-tags{display:flex; gap:8px; flex-wrap:wrap; font-family:var(--font-mono); font-size:12px;}
+  .project-tags span{color:var(--accent); border:1px solid var(--accent-soft); background:var(--accent-soft);padding:3px 10px; border-radius:4px;}
+  .project-links{display:flex; flex-direction:column; gap:10px; align-items:flex-end;font-family:var(--font-mono); font-size:13px;justify-content:center;}
+  .project-links a{color:var(--text-dim); border-bottom:1px solid transparent;transition: color .2s ease, border-color .2s ease;}
+  .project-links a:hover{color:var(--accent); border-color:var(--accent);}
+  .timeline{position:relative; padding-left:32px;}
+  .timeline::before{content:""; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--line);}
+  .tl-item{position:relative; padding-bottom:36px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{content:""; position:absolute; left:-32px; top:6px;width:13px; height:13px; border-radius:50%;background:var(--bg); border:2px solid var(--accent);}
+  .tl-date{font-family:var(--font-mono); font-size:13px; color:var(--accent); margin-bottom:6px;}
+  .tl-item h3{font-size:18px; margin-bottom:6px;}
+  .tl-item p{color:var(--text-dim); font-size:14.5px; max-width:600px;}
+  .contact-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:center;}
+  .contact h2{margin-bottom:16px;}
+  .contact p{color:var(--text-dim); max-width:480px; margin-bottom:32px; font-size:16px;}
+  .contact-links{display:flex; flex-direction:column; gap:14px; font-family:var(--font-mono); font-size:15px;}
+  .contact-links a{display:flex; align-items:center; gap:12px; color:var(--text-dim); transition:color .2s ease;}
+  .contact-links a:hover{color:var(--accent);}
+  .contact-links .arrow{color:var(--accent);}
+  .contact-card{background:var(--panel); border:1px solid var(--line); border-radius:10px;padding:32px; font-family:var(--font-mono); font-size:13px; color:var(--text-dim);}
+  .contact-card .ic-title{color:var(--accent); text-transform:uppercase; letter-spacing:.08em; font-size:12px; margin-bottom:16px;}
+  .contact-card pre{white-space:pre-wrap; line-height:1.8;}
+  .contact-card .key{color:#79c0ff;}
+  .contact-card .str{color:var(--warn);}
+  footer{padding:32px 0; text-align:center;font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim);}
+  footer span{color:var(--accent);}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+  @media (max-width: 860px){
+    .about-grid, .contact-grid{grid-template-columns:1fr; gap:36px;}
+    .skills-grid{grid-template-columns:1fr 1fr;}
+    .project{grid-template-columns:1fr; gap:14px;}
+    .project-links{align-items:flex-start;}
+  }
+  @media (max-width: 640px){
+    section{padding:64px 0;}
+    .nav-links{position:fixed; top:64px; left:0; right:0;flex-direction:column; gap:0;background:var(--bg-soft);border-bottom:1px solid var(--line);max-height:0; overflow:hidden;transition:max-height .3s ease;}
+    .nav-links.open{max-height:280px;}
+    .nav-links a{padding:16px 24px; border-bottom:1px solid var(--line); width:100%;}
+    .nav-links a::after{display:none;}
+    .menu-toggle{display:flex; flex-direction:column; gap:5px; cursor:pointer;background:none; border:none; padding:6px;}
+    .menu-toggle span{width:22px; height:2px; background:var(--text);}
+    .skills-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:clamp(36px,12vw,56px);}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="logo">vijaya<span>@</span>portfolio<span>:~$</span></a>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menuToggle">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="wrap hero-content">
+    <div class="hero-tag"><span class="dot"></span> status: open to opportunities</div>
+    <h1>Vijayalakshmi<br>builds <span class="accent">software</span><br>that solves real problems.</h1>
+    <p class="lead">Computer science graduate focused on full-stack development, data structures &amp; algorithms, and machine learning. I turn ideas into clean, working code.</p>
+
+    <div class="terminal">
+      <div class="line"><span class="prompt">$</span> <span>whoami</span></div>
+      <div class="line">vijayalakshmi — software engineer, problem solver, lifelong learner<span class="caret"></span></div>
+    </div>
+
+    <div class="btn-row">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <div class="eyebrow">about</div>
+      <h2>A bit about me</h2>
+      <p>I'm <strong>Vijayalakshmi</strong>, a computer science engineer with a strong foundation in algorithms, system design, and modern web technologies. I enjoy breaking down complex problems into simple, elegant solutions — and I'm just as comfortable debugging a tricky recursion as I am designing a clean user interface.</p>
+      <p>My interests sit at the intersection of <strong>software development</strong> and <strong>artificial intelligence</strong>. I've worked on projects ranging from web applications to machine learning models, and I'm always looking for the next challenge that pushes my skills further.</p>
+      <p>Outside of coding, I like writing technical blogs, mentoring juniors in data structures, and contributing to open-source projects.</p>
+
+      <div class="stack-list">
+        <span>Python</span><span>Java</span><span>C++</span><span>JavaScript</span>
+        <span>React</span><span>Node.js</span><span>SQL</span><span>Git</span>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="ic-title">profile.json</div>
+      <div class="info-row"><span>name</span><b>Vijayalakshmi</b></div>
+      <div class="info-row"><span>role</span><b>CS Engineer</b></div>
+      <div class="info-row"><span>education</span><b>B.E. Computer Science</b></div>
+      <div class="info-row"><span>focus</span><b>Full-Stack &amp; ML</b></div>
+      <div class="info-row"><span>location</span><b>India</b></div>
+      <div class="info-row"><span>availability</span><b>Open to roles</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">skills</div>
+    <h2>What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Languages <span class="tag">core</span></h3>
+        <ul>
+          <li>Python</li>
+          <li>Java</li>
+          <li>C / C++</li>
+          <li>JavaScript</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Web Development <span class="tag">build</span></h3>
+        <ul>
+          <li>HTML, CSS, React</li>
+          <li>Node.js &amp; Express</li>
+          <li>REST APIs</li>
+          <li>Responsive UI design</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Data &amp; ML <span class="tag">applied</span></h3>
+        <ul>
+          <li>Pandas, NumPy</li>
+          <li>Scikit-learn</li>
+          <li>Data visualization</li>
+          <li>Basic deep learning</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Databases <span class="tag">store</span></h3>
+        <ul>
+          <li>MySQL</li>
+          <li>MongoDB</li>
+          <li>Database design</li>
+          <li>Query optimization</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Tools <span class="tag">flow</span></h3>
+        <ul>
+          <li>Git &amp; GitHub</li>
+          <li>VS Code</li>
+          <li>Linux / Bash</li>
+          <li>Postman</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Core CS <span class="tag">fundamentals</span></h3>
+        <ul>
+          <li>Data Structures</li>
+          <li>Algorithms</li>
+          <li>OOP &amp; System Design</li>
+          <li>Operating Systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">projects</div>
+    <h2>Things I've built</h2>
+    <div class="projects">
+
+      <div class="project">
+        <div class="project-index">01</div>
+        <div class="project-body">
+          <h3>Smart Attendance System</h3>
+          <p>A face-recognition based attendance tracker that automates daily check-ins for classrooms, with a live dashboard for teachers to monitor records in real time.</p>
+          <div class="project-tags"><span>Python</span><span>OpenCV</span><span>Flask</span><span>SQLite</span></div>
+        </div>
+        <div class="project-links">
+          <a href="#">Live demo →</a>
+          <a href="#">Source code →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-index">02</div>
+        <div class="project-body">
+          <h3>Campus Connect</h3>
+          <p>A full-stack web platform that helps students discover clubs, events, and lost-and-found listings on campus, with role-based logins for students and admins.</p>
+          <div class="project-tags"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Express</span></div>
+        </div>
+        <div class="project-links">
+          <a href="#">Live demo →</a>
+          <a href="#">Source code →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-index">03</div>
+        <div class="project-body">
+          <h3>Movie Recommendation Engine</h3>
+          <p>A content-based recommendation system that suggests movies based on user preferences, built using cosine similarity on a curated dataset of films.</p>
+          <div class="project-tags"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>Streamlit</span></div>
+        </div>
+        <div class="project-links">
+          <a href="#">Live demo →</a>
+          <a href="#">Source code →</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-index">04</div>
+        <div class="project-body">
+          <h3>Algorithm Visualizer</h3>
+          <p>An interactive web tool that animates sorting and pathfinding algorithms step by step, built to help students understand how each algorithm behaves.</p>
+          <div class="project-tags"><span>JavaScript</span><span>HTML/CSS</span><span>Canvas API</span></div>
+        </div>
+        <div class="project-links">
+          <a href="#">Live demo →</a>
+          <a href="#">Source code →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">experience</div>
+    <h2>Where I've worked &amp; studied</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">2025 — Present</div>
+        <h3>Software Engineering Intern, TechNova Solutions</h3>
+        <p>Working on the backend team building REST APIs in Node.js, optimizing database queries, and contributing to a microservices-based architecture.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2024 — 2025</div>
+        <h3>Open Source Contributor</h3>
+        <p>Contributed bug fixes and documentation improvements to community projects, focusing on accessibility and developer experience.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2021 — 2025</div>
+        <h3>B.E. in Computer Science Engineering</h3>
+        <p>Coursework in data structures, algorithms, operating systems, databases, and machine learning, alongside hands-on project work and hackathons.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact">
+      <div class="eyebrow">contact</div>
+      <h2>Let's build something together</h2>
+      <p>Whether you have an opportunity, a project idea, or just want to talk about code — my inbox is open.</p>
+      <div class="contact-links">
+        <a href="mailto:vijayalakshmi@example.com"><span class="arrow">→</span> vijayalakshmi@example.com</a>
+        <a href="#"><span class="arrow">→</span> github.com/vijayalakshmi</a>
+        <a href="#"><span class="arrow">→</span> linkedin.com/in/vijayalakshmi</a>
+        <a href="#"><span class="arrow">→</span> Download Resume</a>
+      </div>
+    </div>
+    <div class="contact-card">
+      <div class="ic-title">contact.json</div>
+      <pre>{
+  <span class="key">"name"</span>: <span class="str">"Vijayalakshmi"</span>,
+  <span class="key">"role"</span>: <span class="str">"Computer Science Engineer"</span>,
+  <span class="key">"email"</span>: <span class="str">"vijayalakshmi@example.com"</span>,
+  <span class="key">"status"</span>: <span class="str">"open_to_work"</span>,
+  <span class="key">"response_time"</span>: <span class="str">"~24 hours"</span>
+}</pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">designed &amp; built by <span>Vijayalakshmi</span> · © 2026</div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('open');
+    const expanded = links.classList.contains('open');
+    toggle.setAttribute('aria-expanded', expanded);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+  }));
+</script>
+
+</body>
+</html>
