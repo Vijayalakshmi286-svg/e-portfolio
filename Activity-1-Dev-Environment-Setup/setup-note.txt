@@ -1,0 +1,7 @@
+I installed Visual Studio Code and the Microsoft C/C++ extension.
+I installed GCC using MSYS2 and configured the GCC path in Windows.
+Initially, the MSYS2 packages needed to be updated before GCC could be used correctly.
+After updating the packages, GCC and G++ worked successfully.
+I created a C program named hello.c in VS Code.
+I compiled it using gcc and ran the generated executable.
+The program successfully displayed "Hello, World!" in the terminal.
